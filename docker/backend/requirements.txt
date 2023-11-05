@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+python-multipart
+mecab-python3
+unidic-lite
+numpy
