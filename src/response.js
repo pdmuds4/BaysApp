@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const Domein = "https://data-economy-bays-backend.onrender.com";
+const Domain = "https://data-economy-bays-backend.onrender.com";
 //const Domain = "http://127.0.0.1:3001";
 
 // docker用

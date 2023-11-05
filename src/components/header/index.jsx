@@ -1,6 +1,6 @@
 import {AppBar, Box, Typography} from '@mui/material';
 
-export default function Footer() {
+export default function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{padding: '1%', textAlign: 'center'}} color='success'>
