@@ -1,6 +1,5 @@
 import MeCab, sqlite3
 import numpy as np
-from typing import Literal
 
 class Nive:
     def __init__(self, sentense: str = None):
@@ -23,7 +22,7 @@ class Nive:
         return result
 
 
-    def wordProb(self, word: str, category: Literal["weather", "life", "sports", "culture", "economy"]) -> float:
+    def wordProb(self, word: str, category: str) -> float:
         assert category in self.category, f"Category must be one of {self.category}"
 
         self.cur.execute(f"SELECT \
