@@ -1,31 +1,27 @@
 from fastapi import FastAPI, Form
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
+import uvicorn, json
 
-from fastapi import FastAPI, Request, status
-from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
-
-from scripts.predictNive import Nive
+from scripts.predictNaive import Naive
+from scripts.predictNetwork import Network
 
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://bays-app.vercel.app"],
+    #allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.exception_handler(RequestValidationError)
-async def handler(request:Request, exc:RequestValidationError):
-    print(exc)
-    return JSONResponse(content={}, status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
-
-
 @app.post("/nive")
 async def nive(centence: str = Form(...)):
-    return Nive(centence).predict()
+    return Naive().predict(centence)
+
+@app.post("/network")
+async def ntwork(result: str = Form(...), evidence: str = Form(...)):
+    return Network().query(result, json.loads(evidence))
 
 
 if __name__=="__main__":

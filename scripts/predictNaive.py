@@ -1,17 +1,16 @@
 import MeCab, sqlite3
 import numpy as np
 
-class Nive:
-    def __init__(self, sentense: str = None):
-        self.sentense = sentense
+class Naive:
+    def __init__(self):
         self.category = ["weather", "life", "sports", "culture", "economy"]
         
         self.con = sqlite3.connect("database/words.db")
         self.cur = self.con.cursor()
 
 
-    def predict(self): ## 各カテゴリーに対しての確率を計算する関数
-        words = self.parse_words()
+    def predict(self, centence: str): ## 各カテゴリーに対しての確率を計算する関数
+        words = self.parse_words(centence)
         
         scores = [np.log(np.prod([self.wordProb(word,c) for word in words])) for c in self.category]
         scores = [score - min(scores) for score in scores]
@@ -42,9 +41,9 @@ class Nive:
         
 
     
-    def parse_words(self) -> np.array: # 文章から単語を取り出す関数
+    def parse_words(self, centence: str) -> np.array: # 文章から単語を取り出す関数
         tagger = MeCab.Tagger()
-        node = tagger.parseToNode(self.sentense)
+        node = tagger.parseToNode(centence)
 
         words = []
         while node:
@@ -61,4 +60,4 @@ class Nive:
 
 
 if __name__ == '__main__':
-    print(Nive("中東を訪れているアメリカのブリンケン国務長官は4日、ヨルダンで記者会見し、停戦はハマスを利するだけだとして、引き続き人道目的での「戦闘の一時的な停止」を求めていく考えを強調しました。").predict())
+    print(Naive().predict("中東を訪れているアメリカのブリンケン国務長官は4日、ヨルダンで記者会見し、停戦はハマスを利するだけだとして、引き続き人道目的での「戦闘の一時的な停止」を求めていく考えを強調しました。"))

@@ -8,7 +8,7 @@ export default function DetailCard(props){
         <>
             <Grid item xs={12} md={4}>
                 <Card>
-                    <CardContent sx={{backgroundColor: "#204f21"}}>
+                    <CardContent sx={{backgroundColor: props.color}}>
                         <Typography level="h3" component="div" textColor={'white'} 
                                     sx={{borderBottom: '2', borderBottomStyle: 'solid' , marginBottom: "2%"}}>
                             {props.title}

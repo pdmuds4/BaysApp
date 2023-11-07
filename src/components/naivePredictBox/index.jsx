@@ -5,7 +5,7 @@ import { postResponse } from '../../response';
 import PredictCard from './predictCard';
 import ResultCard from './resultCard';
 
-export default function PredictBox(){
+export default function NaivePredictBox(){
     const [result, setResult] = useState(null);
 
     const handlesubmit = async (e) => {
